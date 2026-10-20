@@ -1,6 +1,6 @@
 import { caseStudies } from "./data/case-studies.js?v=footballers-copy-20261020";
 import { setupLanguage } from "./i18n.js?v=footballers-copy-20261020";
-import { playerMetrics, playerProfiles, playerServices, playerWorkLinks } from "./data/section-content.js?v=footballers-copy-20261020";
+import { playerMetrics, playerProfiles, playerServices, playerWorkLinks } from "./data/section-content.js?v=footballers-photos-20261020";
 
 const root = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
