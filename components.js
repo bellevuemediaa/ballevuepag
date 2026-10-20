@@ -23,8 +23,8 @@ export function renderServices() {
 
 export function renderProcess() {
   const target = document.querySelector("[data-process]");
-  target.innerHTML = process.map((title, index) => `
-    <li data-step="${index}"><span>0${index + 1}</span><strong>${escape(title)}</strong></li>`).join("");
+  target.innerHTML = process.map((item, index) => `
+    <li data-step="${index}"><button class="process__step" type="button" data-process-trigger data-description="${escape(item.description)}" aria-expanded="false" aria-controls="process-detail"><span>0${index + 1}</span><strong>${escape(item.title)}</strong></button></li>`).join("");
 }
 
 export function renderWork() {

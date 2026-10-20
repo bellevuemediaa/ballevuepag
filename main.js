@@ -38,6 +38,24 @@ function setupMenu() {
   });
 }
 
+function setupProcess() {
+  const triggers = [...document.querySelectorAll("[data-process-trigger]")];
+  const detail = document.querySelector("[data-process-detail]");
+  triggers.forEach((trigger) => trigger.addEventListener("click", () => {
+    const shouldOpen = trigger.getAttribute("aria-expanded") !== "true";
+    triggers.forEach((item) => {
+      item.setAttribute("aria-expanded", "false");
+      item.closest("[data-step]").classList.remove("is-selected");
+    });
+    detail.hidden = !shouldOpen;
+    detail.textContent = shouldOpen ? trigger.dataset.description : "";
+    if (shouldOpen) {
+      trigger.setAttribute("aria-expanded", "true");
+      trigger.closest("[data-step]").classList.add("is-selected");
+    }
+  }));
+}
+
 function setupReveals() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -283,6 +301,7 @@ function setupScrollStory() {
 
 setupIntro();
 setupMenu();
+setupProcess();
 setupReveals();
 setupServices();
 setupMagneticButton();

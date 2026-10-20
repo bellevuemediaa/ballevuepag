@@ -1622,3 +1622,43 @@ html.motion-reduced .project__flare::before { animation: none; }
   background-clip: text;
 }
 .team__statement strong::after { content: none; }
+
+/* The display font extends beyond its final advance width on desktop. */
+@media (min-width: 901px) {
+  .team__statement strong { padding-right: .2em; }
+}
+
+/* Clickable process steps keep the original scroll-led rhythm. */
+.process__step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: .6rem 0 1rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.process__step:hover strong,
+.process__step:focus-visible strong,
+.process__steps li.is-selected strong { color: var(--gold); }
+.process__steps li:hover,
+.process__steps li:focus-within { opacity: 1; }
+.process__step:focus-visible { outline: 2px solid var(--gold); outline-offset: .35rem; }
+.process__steps li.is-selected { opacity: 1; }
+.process__detail {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+  margin: 0 0 1.5rem;
+  color: var(--white);
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.45;
+}
+.process__detail[hidden] { display: none; }
+@media (max-width: 900px) {
+  .process__steps li { display: block; }
+  .process__step { display: grid; grid-template-columns: 3.5rem 1fr; align-items: center; }
+}
