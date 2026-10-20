@@ -11,36 +11,21 @@ export const caseStudies = {
   clubs: [
     {
       type: "club", id: "river-benavidez", title: "River de Benavidez", context: "Mallorca × Scouting Cup",
-      summary: "A selection of squad announcements, matchday graphics, starting lineups and results for the Scouting Cup.",
-      image: "../assets/clubs/river-benavidez.webp", width: 200, height: 283,
+      summary: "From the brief, we set the art direction and photographic direction and built a visual identity for the club’s tour of Madrid and Mallorca alongside the ScoutingCup. We directed the project and covered every match.",
+      image: "../assets/clubs/river-20261020.png", width: 1500, height: 1500,
       galleryPrefix: "../assets/clubs/projects/river-benavidez/", galleryCount: 25, galleryWide: [19, 24],
-      galleryLabels: [
-        ...Array(8).fill("Squad announcement"), ...Array(4).fill("Matchday graphic"),
-        ...Array(3).fill("Scouting Cup cover"), ...Array(2).fill("Match result"),
-        ...Array(8).fill("Starting lineup"),
-      ],
     },
     {
       type: "club", id: "sao-joao-de-ver", title: "São João de Ver",
-      summary: "A selection of player announcements, matchday graphics, lineups, statistics and club updates.",
-      image: "../assets/clubs/sao-joao-de-ver-transparent.png", width: 1254, height: 1254,
+      summary: "Official rebrand for the 26/27 season. We developed the concept, the art direction and all the pieces the club uses throughout the season.",
+      image: "../assets/clubs/sao-joao-de-ver-20261020.png", width: 2264, height: 3315,
       galleryPrefix: "../assets/clubs/projects/sao-joao-de-ver/", galleryCount: 18, galleryWide: [1, 3, 11, 12, 13, 18],
-      galleryLabels: [
-        "Player welcome", "Player of the match", "Match statistics", ...Array(4).fill("Player welcome"),
-        "Official statement", "Matchday graphic", "Matchday graphic", "Ticket information",
-        "Kickoff and full time", "Starting lineup", "Player of the match", "New head coach",
-        "Quote graphic", "Contract renewal", "Starting lineup",
-      ],
     },
     {
       type: "club", id: "delta", title: "Delta FC",
-      summary: "A selection of matchday graphics, fixtures, starting lineups, results and player highlights.",
-      image: "../assets/clubs/delta-transparent.png", width: 1203, height: 1308,
+      summary: "Rebrand for the 26/27 season. We developed the concept, the art direction and every piece the club will use across the season.",
+      image: "../assets/clubs/delta-20261020.png", width: 730, height: 665,
       galleryPrefix: "../assets/clubs/projects/delta/", galleryCount: 10, galleryPanorama: [9],
-      galleryLabels: [
-        "Matchday graphic", "Monthly schedule", "Starting lineup", "Next match", "Kickoff",
-        "Full-time result", "Goal graphic", "Player of the match", "Club graphics panorama", "Feed composition",
-      ],
     },
   ],
   companies: [
