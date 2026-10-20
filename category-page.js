@@ -78,15 +78,13 @@ function renderCaseStudies() {
                 <div class="club-feature__gallery-grid" data-gallery-count="${study.galleryCount}">
                   ${Array.from({ length: study.galleryCount }, (_, imageIndex) => {
                     const number = String(imageIndex + 1).padStart(3, "0");
-                    const label = study.galleryLabels[imageIndex];
                     const preserveArtwork = (study.id === "sao-joao-de-ver" && imageIndex >= 15)
                       || (study.id === "delta" && imageIndex >= 8);
                     const imageSrc = `${escape(study.galleryPrefix)}${number}${preserveArtwork ? "" : "-thumb"}.webp`;
-                    return `<button class="club-feature__gallery-item${preserveArtwork ? " club-feature__gallery-item--uncropped" : ""}" type="button" data-club-gallery-index="${index}" data-club-photo-index="${imageIndex}">
+                    return `<button class="club-feature__gallery-item${preserveArtwork ? " club-feature__gallery-item--uncropped" : ""}" type="button" data-club-gallery-index="${index}" data-club-photo-index="${imageIndex}" aria-label="${escape(study.title)} — ${String(imageIndex + 1).padStart(2, "0")} / ${study.galleryCount}">
                       ${preserveArtwork ? `<img class="club-feature__gallery-backdrop" src="${imageSrc}" alt="" loading="lazy" decoding="async" aria-hidden="true" />` : ""}
                       <img${preserveArtwork ? ' class="club-feature__gallery-artwork"' : ""} src="${imageSrc}" alt="" loading="lazy" decoding="async" />
                       <span class="club-feature__gallery-number">${String(imageIndex + 1).padStart(2, "0")}</span>
-                      <span class="club-feature__gallery-caption">${escape(label)}</span>
                     </button>`;
                   }).join("")}
                 </div>
@@ -97,7 +95,7 @@ function renderCaseStudies() {
       <dialog class="club-lightbox" aria-label="Club image">
         <button class="club-lightbox__close" type="button" aria-label="Close image">×</button>
         <img alt="" />
-        <p><span data-club-lightbox-meta></span><small data-club-lightbox-label></small></p>
+        <p><span data-club-lightbox-meta></span></p>
       </dialog>`;
     return;
   }
@@ -303,7 +301,6 @@ function setupClubLightbox() {
   const studies = caseStudies.clubs;
   const image = dialog.querySelector("img");
   const meta = dialog.querySelector("[data-club-lightbox-meta]");
-  const label = dialog.querySelector("[data-club-lightbox-label]");
   let activeImage = 0;
   const clearImage = () => {
     image.hidden = true;
@@ -317,9 +314,8 @@ function setupClubLightbox() {
       const fullSrc = `${study.galleryPrefix}${String(position).padStart(3, "0")}.webp`;
       const request = ++activeImage;
       clearImage();
-      image.alt = `${study.title} — ${study.galleryLabels[position - 1]}`;
+      image.alt = `${study.title} — ${String(position).padStart(2, "0")} / ${study.galleryCount}`;
       meta.textContent = `${study.title} · ${String(position).padStart(2, "0")} / ${study.galleryCount}`;
-      label.textContent = study.galleryLabels[position - 1];
       const thumbnail = button.querySelector(".club-feature__gallery-artwork, img");
       if (thumbnail?.complete && thumbnail.naturalWidth) {
         image.src = thumbnail.currentSrc;
