@@ -148,18 +148,20 @@
         <div class="final__top"><p class="eyebrow">Contact / Bellevue</p><span>08 / 08</span></div>
         <div class="contact-layout">
           <div class="contact-layout__intro"><h2 id="contact-title">Let's build<br /><em>what's next.</em></h2><p>If you need a team behind your communication, let's talk.</p></div>
-          <form class="contact-form" data-contact-form action="#contact" method="POST">
+          <form class="contact-form" data-contact-form action="https://formsubmit.co/bellevuecommercial@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Bellevue website enquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_url" value="" />
+            <input class="contact-form__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <label class="contact-field"><span>I’m reaching out as</span><select name="contactType" required><option value="" selected disabled>Select one</option><option>Club</option><option>Company</option><option>Athlete</option><option>Other</option></select></label>
             <label class="contact-field"><span>Tell us about your idea <em>optional</em></span><textarea name="idea" rows="4" placeholder="Your project, challenge or opportunity"></textarea></label>
             <label class="contact-field"><span>Full name</span><input name="fullName" type="text" autocomplete="name" required /></label>
             <label class="contact-field"><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
             <label class="contact-field"><span>Phone number <em>optional</em></span><input name="phone" type="tel" autocomplete="tel" /></label>
-            <button class="contact-submit" type="submit" disabled>Continue on Instagram</button>
+            <button class="contact-submit" type="submit">Send enquiry</button>
             <p class="contact-form__status" data-contact-status aria-live="polite"></p>
-            <div class="contact-form__handoff" data-contact-handoff hidden>
-              <label class="contact-field"><span>Message for Instagram</span><textarea data-contact-message rows="7" readonly></textarea></label>
-              <div class="contact-form__handoff-actions"><button type="button" data-contact-copy>Copy message</button><a href="https://ig.me/m/bellevuemedia" target="_blank" rel="noopener noreferrer">Open Instagram chat</a></div>
-            </div>
+            <a class="contact-form__fallback" data-contact-fallback href="mailto:bellevuecommercial@gmail.com" hidden>Email us directly</a>
           </form>
         </div>
       </section>

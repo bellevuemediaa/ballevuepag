@@ -132,58 +132,52 @@ function setupContactForm() {
   const status = document.querySelector("[data-contact-status]");
   if (!form) return;
   const submitButton = form.querySelector("[type='submit']");
-  const handoff = form.querySelector("[data-contact-handoff]");
-  const messageField = form.querySelector("[data-contact-message]");
-  const copyButton = form.querySelector("[data-contact-copy]");
-  const instagramUrl = "https://ig.me/m/bellevuemedia";
+  const sourceField = form.querySelector("[name='_url']");
+  const fallback = form.querySelector("[data-contact-fallback]");
+  const endpoint = "https://formsubmit.co/ajax/bellevuecommercial@gmail.com";
   const isSpanish = () => document.documentElement.lang === "es";
-  submitButton.disabled = false;
-
-  const copyMessage = async () => {
-    if (!navigator.clipboard?.writeText) return false;
-    try {
-      await navigator.clipboard.writeText(messageField.value);
-      return true;
-    } catch {
-      return false;
-    }
-  };
+  sourceField.value = window.location.href.split("#")[0];
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (submitButton.disabled) return;
     const fields = new FormData(form);
-    const type = String(fields.get("contactType") || "").trim();
-    const idea = String(fields.get("idea") || "").trim();
-    const name = String(fields.get("fullName") || "").trim();
-    const email = String(fields.get("email") || "").trim();
-    const phone = String(fields.get("phone") || "").trim();
     const spanish = isSpanish();
-    messageField.value = [
-      spanish ? "Hola Bellevue, quiero hacer una consulta desde la web." : "Hi Bellevue, I'd like to get in touch through your website.",
-      `${spanish ? "Me contacto como" : "I'm reaching out as"}: ${type}`,
-      `${spanish ? "Nombre" : "Name"}: ${name}`,
-      `${spanish ? "Correo" : "Email"}: ${email}`,
-      ...(phone ? [`${spanish ? "Teléfono" : "Phone"}: ${phone}`] : []),
-      ...(idea ? [`${spanish ? "Idea" : "Idea"}: ${idea}`] : []),
+    const message = [
+      `${spanish ? "Me contacto como" : "Reaching out as"}: ${fields.get("contactType") || ""}`,
+      `${spanish ? "Nombre" : "Name"}: ${fields.get("fullName") || ""}`,
+      `${spanish ? "Correo" : "Email"}: ${fields.get("email") || ""}`,
+      ...(fields.get("phone") ? [`${spanish ? "Teléfono" : "Phone"}: ${fields.get("phone")}`] : []),
+      ...(fields.get("idea") ? [`${spanish ? "Idea" : "Idea"}: ${fields.get("idea")}`] : []),
     ].join("\n");
-    handoff.hidden = false;
+    fallback.href = `mailto:bellevuecommercial@gmail.com?subject=${encodeURIComponent("Bellevue website enquiry")}&body=${encodeURIComponent(message)}`;
+    fallback.hidden = true;
+    submitButton.disabled = true;
+    status.textContent = spanish ? "Enviando consulta…" : "Sending enquiry…";
 
-    const copyPromise = copyMessage();
-    window.open(instagramUrl, "_blank", "noopener,noreferrer");
-    const copied = await copyPromise;
-    status.textContent = copied
-      ? (spanish ? "Mensaje copiado. Pegalo en el chat de Instagram y envialo." : "Message copied. Paste it into the Instagram chat and send it.")
-      : (spanish ? "Copiá el mensaje de abajo, pegalo en el chat de Instagram y envialo." : "Copy the message below, paste it into the Instagram chat and send it.");
-  });
-
-  copyButton.addEventListener("click", async () => {
-    const copied = await copyMessage();
-    status.textContent = copied
-      ? (isSpanish() ? "Mensaje copiado. Pegalo en el chat de Instagram y envialo." : "Message copied. Paste it into the Instagram chat and send it.")
-      : (isSpanish() ? "Seleccioná el mensaje de abajo para copiarlo manualmente." : "Select the message below to copy it manually.");
-    if (!copied) {
-      messageField.focus();
-      messageField.select();
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(Object.fromEntries(fields)),
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== "true")) {
+        throw new Error("FormSubmit did not accept the enquiry");
+      }
+      form.reset();
+      status.textContent = spanish ? "Gracias, recibimos tu consulta." : "Thank you, your enquiry was submitted.";
+    } catch {
+      status.textContent = spanish
+        ? "No pudimos confirmar el envío. Tu consulta sigue en el formulario; probá de nuevo o escribinos directamente por email."
+        : "We couldn't confirm delivery. Your enquiry is still in the form; please try again or email us directly.";
+      fallback.hidden = false;
+    } finally {
+      window.clearTimeout(timeout);
+      submitButton.disabled = false;
     }
   });
 }
