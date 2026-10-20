@@ -1073,7 +1073,7 @@ html.motion-full .club-lightbox__close{cursor:pointer}
 }
 .photo-slider__track {
   display: flex;
-  width: 400%;
+  width: 112%;
   height: 100%;
   will-change: transform;
 }
@@ -1123,10 +1123,8 @@ html.motion-full .club-lightbox__close{cursor:pointer}
 .photo-slider__actions select:focus-visible { border-color: var(--gold); color: var(--gold); }
 .photo-slider__actions button:focus-visible,
 .photo-slider__actions select:focus-visible { outline: 2px solid var(--gold); outline-offset: .15rem; }
-@media (min-width: 701px) {
-  .photo-slider__track { width: 133.333333%; }
-}
 @media (max-width: 700px) {
+  .photo-slider__track { width: 272%; }
   .case-study-gallery__head { gap: 1rem; }
   .case-study-gallery__head h2 { font-size: clamp(2.6rem, 10vw, 4rem); }
   .photo-slider__frame { height: min(52svh, 27rem); min-height: 17rem; }
