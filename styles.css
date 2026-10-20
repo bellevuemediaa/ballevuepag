@@ -1599,3 +1599,17 @@ html.motion-reduced .project__flare::before { animation: none; }
   .bridge__stage p, .bridge__stage h2 { position: relative; z-index: 1; }
   .bridge__stage h2 { position: absolute; }
 }
+
+/* Allow the longer team statement to wrap without clipping its gold reveal. */
+.team__statement strong {
+  max-width: 100%;
+  white-space: normal;
+  font-size: clamp(3rem, 5.2vw, 6.8rem);
+  line-height: .96;
+}
+@media (max-width: 900px) {
+  .team__statement strong { font-size: clamp(2.5rem, 8vw, 5rem); }
+}
+@media (max-width: 560px) {
+  .team__statement strong { font-size: clamp(2.6rem, 13vw, 4.3rem); }
+}
