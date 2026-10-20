@@ -3,7 +3,7 @@ export const caseStudies = {
   footballers: [
     {
       type: "gallery",
-      title: "Pre-match photos",
+      title: "Matchday Designs:",
       imageCount: 63,
       imagePrefix: "../assets/pre-match/pre-match-",
     },

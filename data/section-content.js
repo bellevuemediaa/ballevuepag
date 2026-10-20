@@ -3,27 +3,27 @@ export const playerProfiles = [
   {
     name: "Thomas Meunier",
     image: "../assets/thomas-meunier.png",
-    description: "We were with Thomas through the whole World Cup. Pre-match graphics, result cards, post-match highlights, and the back-and-forth on what to post and when. A few pieces got the extra care they deserved, the moments that were bigger than a quick edit.",
+    description: "Thomas, throughout the World Cup. Matchday designs, full-time graphics and post-match highlights, with the planning of what to publish and when. For the biggest moments of the tournament we produced dedicated pieces.",
   },
   {
     name: "Botond Balogh",
     image: "../assets/botond-balogh.png",
-    description: "Same rhythm through the Euros with Botond, pre-match to post-match, plus monthly recaps and stat cards. When a game called for something more, we made it, commemorative pieces for the nights worth remembering.",
+    description: "Botond, at the Euros. Matchday designs and post-match content for each game, plus monthly recaps and stats graphics. For the matches that called for it, we made commemorative pieces.",
   },
   {
     name: "Samuel Kotto",
     image: "../assets/samuel-kotto.png",
-    description: "Samuel's was a season-long build. Weekly content all year, then a real jump when the Africa Cup of Nations came around and we leaned in harder.",
+    description: "Samuel, a full-season project. Weekly content from the first matchday to the last, with additional production around the Africa Cup of Nations.",
   },
   {
     name: "Sol Sidibe",
     image: "../assets/sol-sidibe.png",
-    description: "Kept the same rhythm going with Sol, pre and post-match content, season recaps, and stayed close when the call-up to England's U20 squad landed.",
+    description: "Sol, across the season. Matchday designs, post-match content and season recaps, plus the content around the call-up to England’s U20 squad.",
   },
   {
     name: "Mohamed Daramy",
     image: "../assets/mohamed-daramy.png",
-    description: "Mohamed's is the simple version, and that's the point. Pre-match, post-match, season videos, matchday in and matchday out.",
+    description: "Mohamed, every matchday. Matchday designs, post-match content and season videos, week after week.",
   },
 ];
 
