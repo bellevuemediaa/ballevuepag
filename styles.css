@@ -1613,3 +1613,12 @@ html.motion-reduced .project__flare::before { animation: none; }
 @media (max-width: 560px) {
   .team__statement strong { font-size: clamp(2.6rem, 13vw, 4.3rem); }
 }
+
+/* Paint the real letters so the final S cannot be clipped by a duplicate overlay. */
+.team__statement strong {
+  color: transparent;
+  background: linear-gradient(90deg, var(--gold) 0 var(--team-fill), rgba(255, 255, 255, .12) var(--team-fill) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.team__statement strong::after { content: none; }
