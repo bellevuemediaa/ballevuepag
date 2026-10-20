@@ -132,31 +132,59 @@ function setupContactForm() {
   const status = document.querySelector("[data-contact-status]");
   if (!form) return;
   const submitButton = form.querySelector("[type='submit']");
-  const sourceField = form.querySelector("[name='_url']");
-  const nextField = form.querySelector("[name='_next']");
-  const pageUrl = `${window.location.origin}${window.location.pathname}`;
-  const query = new URLSearchParams(window.location.search);
+  const handoff = form.querySelector("[data-contact-handoff]");
+  const messageField = form.querySelector("[data-contact-message]");
+  const copyButton = form.querySelector("[data-contact-copy]");
+  const instagramUrl = "https://ig.me/m/bellevuemedia";
+  const isSpanish = () => document.documentElement.lang === "es";
+  submitButton.disabled = false;
 
-  sourceField.value = pageUrl;
-  nextField.value = `${pageUrl}?enquiry=sent#contact`;
+  const copyMessage = async () => {
+    if (!navigator.clipboard?.writeText) return false;
+    try {
+      await navigator.clipboard.writeText(messageField.value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
 
-  if (query.get("enquiry") === "sent") {
-    status.textContent = "Thank you. Your enquiry has been sent.";
-    query.delete("enquiry");
-    const cleanQuery = query.toString();
-    const cleanUrl = `${window.location.pathname}${cleanQuery ? `?${cleanQuery}` : ""}#contact`;
-    window.history.replaceState({}, "", cleanUrl);
-  }
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const fields = new FormData(form);
+    const type = String(fields.get("contactType") || "").trim();
+    const idea = String(fields.get("idea") || "").trim();
+    const name = String(fields.get("fullName") || "").trim();
+    const email = String(fields.get("email") || "").trim();
+    const phone = String(fields.get("phone") || "").trim();
+    const spanish = isSpanish();
+    messageField.value = [
+      spanish ? "Hola Bellevue, quiero hacer una consulta desde la web." : "Hi Bellevue, I'd like to get in touch through your website.",
+      `${spanish ? "Me contacto como" : "I'm reaching out as"}: ${type}`,
+      `${spanish ? "Nombre" : "Name"}: ${name}`,
+      `${spanish ? "Correo" : "Email"}: ${email}`,
+      ...(phone ? [`${spanish ? "Teléfono" : "Phone"}: ${phone}`] : []),
+      ...(idea ? [`${spanish ? "Idea" : "Idea"}: ${idea}`] : []),
+    ].join("\n");
+    handoff.hidden = false;
 
-  form.addEventListener("submit", () => {
-    const ideaField = form.querySelector("[name='idea']");
-    if (ideaField && !ideaField.value.trim()) ideaField.value = "Not provided";
-    status.textContent = "Sending your enquiry…";
-    submitButton.disabled = true;
+    const copyPromise = copyMessage();
+    window.open(instagramUrl, "_blank", "noopener,noreferrer");
+    const copied = await copyPromise;
+    status.textContent = copied
+      ? (spanish ? "Mensaje copiado. Pegalo en el chat de Instagram y envialo." : "Message copied. Paste it into the Instagram chat and send it.")
+      : (spanish ? "Copiá el mensaje de abajo, pegalo en el chat de Instagram y envialo." : "Copy the message below, paste it into the Instagram chat and send it.");
   });
 
-  window.addEventListener("pageshow", () => {
-    submitButton.disabled = false;
+  copyButton.addEventListener("click", async () => {
+    const copied = await copyMessage();
+    status.textContent = copied
+      ? (isSpanish() ? "Mensaje copiado. Pegalo en el chat de Instagram y envialo." : "Message copied. Paste it into the Instagram chat and send it.")
+      : (isSpanish() ? "Seleccioná el mensaje de abajo para copiarlo manualmente." : "Select the message below to copy it manually.");
+    if (!copied) {
+      messageField.focus();
+      messageField.select();
+    }
   });
 }
 
