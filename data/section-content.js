@@ -2,27 +2,27 @@
 export const playerProfiles = [
   {
     name: "Thomas Meunier",
-    image: "../assets/thomas-meunier.png",
+    image: "../assets/thomas-meunier-20261020.webp",
     description: "Thomas, throughout the World Cup. Matchday designs, full-time graphics and post-match highlights, with the planning of what to publish and when. For the biggest moments of the tournament we produced dedicated pieces.",
   },
   {
     name: "Botond Balogh",
-    image: "../assets/botond-balogh.png",
+    image: "../assets/botond-balogh-20261020.webp",
     description: "Botond, at the Euros. Matchday designs and post-match content for each game, plus monthly recaps and stats graphics. For the matches that called for it, we made commemorative pieces.",
   },
   {
     name: "Samuel Kotto",
-    image: "../assets/samuel-kotto.png",
+    image: "../assets/samuel-kotto-20261020.webp",
     description: "Samuel, a full-season project. Weekly content from the first matchday to the last, with additional production around the Africa Cup of Nations.",
   },
   {
     name: "Sol Sidibe",
-    image: "../assets/sol-sidibe.png",
+    image: "../assets/sol-sidibe-20261020.webp",
     description: "Sol, across the season. Matchday designs, post-match content and season recaps, plus the content around the call-up to England’s U20 squad.",
   },
   {
     name: "Mohamed Daramy",
-    image: "../assets/mohamed-daramy.png",
+    image: "../assets/mohamed-daramy-20261020.webp",
     description: "Mohamed, every matchday. Matchday designs, post-match content and season videos, week after week.",
   },
 ];
