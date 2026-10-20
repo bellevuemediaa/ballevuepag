@@ -1,6 +1,6 @@
-import { caseStudies } from "./data/case-studies.js?v=fullride-20261015";
-import { setupLanguage } from "./i18n.js?v=fullride-20261015";
-import { playerMetrics, playerProfiles, playerServices, playerWorkLinks } from "./data/section-content.js?v=video-titles-20260928";
+import { caseStudies } from "./data/case-studies.js?v=footballers-copy-20261020";
+import { setupLanguage } from "./i18n.js?v=footballers-copy-20261020";
+import { playerMetrics, playerProfiles, playerServices, playerWorkLinks } from "./data/section-content.js?v=footballers-copy-20261020";
 
 const root = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -147,10 +147,10 @@ function renderCaseStudies() {
           <span>${String(category === "footballers" ? playerProfiles.length + index + 1 : index + 1).padStart(2, "0")}</span>
           <h2 id="pre-match-title">${escape(study.title)}</h2>
         </div>
-        <div class="photo-slider" data-photo-slider data-image-prefix="${escape(study.imagePrefix)}" data-image-count="${study.imageCount}" role="region" aria-label="Pre-match photos" aria-keyshortcuts="Space ArrowLeft ArrowRight" tabindex="0">
+        <div class="photo-slider" data-photo-slider data-image-prefix="${escape(study.imagePrefix)}" data-image-count="${study.imageCount}" role="region" aria-label="Matchday Designs" aria-keyshortcuts="Space ArrowLeft ArrowRight" tabindex="0">
           <div class="photo-slider__frame" data-photo-frame>
             <div class="photo-slider__track" data-photo-track>
-              ${[0, 1, 2, 3].map((offset) => `<img src="${escape(study.imagePrefix)}${String(offset + 1).padStart(3, "0")}.webp" alt="Pre-match photo ${offset + 1} of ${study.imageCount}" width="1000" height="1778" decoding="async" data-photo-image />`).join("")}
+              ${[0, 1, 2, 3].map((offset) => `<img src="${escape(study.imagePrefix)}${String(offset + 1).padStart(3, "0")}.webp" alt="Matchday design ${offset + 1} of ${study.imageCount}" width="1000" height="1778" decoding="async" data-photo-image />`).join("")}
             </div>
           </div>
           <div class="photo-slider__controls">
@@ -158,7 +158,7 @@ function renderCaseStudies() {
             <div class="photo-slider__actions">
               <button type="button" data-photo-prev aria-label="Previous photo">←</button>
               <label for="pre-match-photo-select" data-photo-select-label>Photo</label>
-              <select id="pre-match-photo-select" data-photo-select aria-label="Choose a pre-match photo">
+              <select id="pre-match-photo-select" data-photo-select aria-label="Choose a matchday design">
                 ${Array.from({ length: study.imageCount }, (_, index) => `<option value="${index}">${String(index + 1).padStart(2, "0")}</option>`).join("")}
               </select>
               <button type="button" data-photo-next aria-label="Next photo">→</button>
@@ -179,7 +179,7 @@ function enhanceFootballers(target, count, galleryCount) {
   count.textContent = String(playerProfiles.length + galleryCount).padStart(2, "0");
   target.insertAdjacentHTML("afterbegin", `
     <section class="player-intro" aria-labelledby="player-intro-title">
-      <p class="eyebrow">Here are some examples of what we do...</p>
+      <p class="eyebrow">A season with Bellevue, from pre-season to the final whistle.</p>
       <h2 id="player-intro-title">This is what a season looks like when we're in it with someone.</h2>
       <nav class="category-anchor-nav" aria-label="Player sections">
         <a href="#player-stories"><span>01</span>Player stories <i aria-hidden="true">↘</i></a>
@@ -214,7 +214,7 @@ function enhanceFootballers(target, count, galleryCount) {
             <p>${escape(profile.description)}</p>
           </article>`).join("")}
       </div>
-      <p class="player-stories__closing">Beyond the day-to-day, we back the player in whatever area they need, and we stay close as real support through their career. While they focus on what matters most, on the pitch, Bellevue puts a team behind them so their image and presence keep growing.</p>
+      <p class="player-stories__closing">Beyond the day-to-day, we help with whatever the player needs: design, content, video, brand partnerships. We stay close through their whole career. While they focus on the pitch, Bellevue puts a team behind their image.</p>
     </section>
     <section class="player-services" id="player-services" aria-labelledby="player-services-title">
       <div class="category-section-head"><p class="eyebrow">What we build</p><h2 id="player-services-title">Services for players</h2></div>
@@ -484,25 +484,25 @@ function setupPhotoSlider() {
     image.src = `${prefix}${String(number).padStart(3, "0")}.webp`;
     image.alt = document.documentElement.lang === "es"
       ? `Foto previa al partido ${number} de ${count}`
-      : `Pre-match photo ${number} of ${count}`;
+      : `Matchday design ${number} of ${count}`;
   };
   const updateAlt = () => {
     [...track.children].forEach((image, position) => {
       const number = photoNumber(current + position);
       image.alt = document.documentElement.lang === "es"
         ? `Foto previa al partido ${number} de ${count}`
-        : `Pre-match photo ${number} of ${count}`;
+        : `Matchday design ${number} of ${count}`;
     });
   };
   const updateSliderLabel = () => {
     const spanish = document.documentElement.lang === "es";
     slider.setAttribute("aria-label", spanish
-      ? `Fotos pre partido. Presioná espacio para ${userPaused ? "reanudar" : "pausar"}.`
-      : `Pre-match photos. Press Space to ${userPaused ? "resume" : "pause"}.`);
+      ? `Diseños de partido. Presioná espacio para ${userPaused ? "reanudar" : "pausar"}.`
+      : `Matchday designs. Press Space to ${userPaused ? "resume" : "pause"}.`);
     currentLabel.textContent = String(photoNumber(current)).padStart(2, "0");
     select.value = String(current);
     selectLabel.textContent = spanish ? "Foto" : "Photo";
-    select.setAttribute("aria-label", spanish ? "Elegir una foto pre partido" : "Choose a pre-match photo");
+    select.setAttribute("aria-label", spanish ? "Elegir un diseño de partido" : "Choose a matchday design");
     previousButton.setAttribute("aria-label", spanish ? "Foto anterior" : "Previous photo");
     nextButton.setAttribute("aria-label", spanish ? "Foto siguiente" : "Next photo");
     toggleButton.textContent = userPaused ? (spanish ? "Reanudar" : "Resume") : (spanish ? "Pausar" : "Pause");
