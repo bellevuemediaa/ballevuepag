@@ -56,7 +56,7 @@ function setupServices() {
   const cardDescription = document.querySelector("[data-service-card-description]");
   const cardTags = document.querySelector("[data-service-card-tags]");
   const cursorAura = document.querySelector("[data-cursor-aura]");
-  const labels = ["Identity", "Strategy", "Athlete", "Markets"];
+  const labels = ["Identity", "Content", "Athletes", "Markets"];
   const glows = ["78% 42%", "24% 60%", "60% 30%", "35% 70%"];
   const images = ["./assets/stadium-tunnel.jpg", "./assets/hero-tunnel.jpg", "./assets/player-rain.jpg", "./assets/stadium-tunnel.jpg"];
   [...new Set(images)].forEach((source) => { const image = new Image(); image.src = source; });
