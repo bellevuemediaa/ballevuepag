@@ -60,7 +60,13 @@ export const services = [
   },
 ];
 
-export const process = ["Understand", "Strategize", "Create", "Publish", "Evolve"];
+export const process = [
+  { title: "Brief", description: "We meet your team, look at what you already have and agree on what you need." },
+  { title: "Direction", description: "We define the look, the content plan and the brands worth approaching." },
+  { title: "Production", description: "Design, video, photography and editing, made by our own team." },
+  { title: "Activation", description: "We publish, cover match days and events live, and run the sponsor deals on top." },
+  { title: "Results", description: "We report what worked and what sold, and plan the next round with you." },
+];
 
 export const projects = [
   { index: "01", label: "Footballers", type: "Category", year: "Explore", direction: "Footballers", href: "./footballers/" },
