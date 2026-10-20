@@ -1629,6 +1629,7 @@ html.motion-reduced .project__flare::before { animation: none; }
 }
 
 /* Clickable process steps keep the original scroll-led rhythm. */
+.process__steps li { opacity: .58; }
 .process__step {
   display: flex;
   flex-direction: column;
