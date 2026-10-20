@@ -514,7 +514,7 @@ function setupPhotoSlider() {
   const renderPosition = () => { track.style.transform = `translate3d(${-offset}px, 0, 0)`; };
   const measure = () => {
     const oldWidth = photoWidth;
-    photoWidth = frame.clientWidth / (window.matchMedia("(max-width: 700px)").matches ? 1 : 3);
+    photoWidth = track.firstElementChild.getBoundingClientRect().width;
     if (oldWidth) offset = offset / oldWidth * photoWidth;
     renderPosition();
   };
