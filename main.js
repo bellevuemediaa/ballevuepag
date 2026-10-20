@@ -38,24 +38,6 @@ function setupMenu() {
   });
 }
 
-function setupProcess() {
-  const triggers = [...document.querySelectorAll("[data-process-trigger]")];
-  const detail = document.querySelector("[data-process-detail]");
-  triggers.forEach((trigger) => trigger.addEventListener("click", () => {
-    const shouldOpen = trigger.getAttribute("aria-expanded") !== "true";
-    triggers.forEach((item) => {
-      item.setAttribute("aria-expanded", "false");
-      item.closest("[data-step]").classList.remove("is-selected");
-    });
-    detail.hidden = !shouldOpen;
-    detail.textContent = shouldOpen ? trigger.dataset.description : "";
-    if (shouldOpen) {
-      trigger.setAttribute("aria-expanded", "true");
-      trigger.closest("[data-step]").classList.add("is-selected");
-    }
-  }));
-}
-
 function setupReveals() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -258,10 +240,17 @@ function setupScrollStory() {
     root.style.setProperty("--team-fill", `${teamProgress * 100}%`);
     root.style.setProperty("--team-p", teamProgress.toFixed(4));
 
-    const processProgress = window.innerWidth <= 560 ? viewportProgress(processSection) : timedProgress(processSection, 0, 0.84);
+    const processFlowsVertically = window.innerWidth <= 900;
+    const processProgress = processFlowsVertically ? viewportProgress(processSection) : timedProgress(processSection, 0, 0.84);
     root.style.setProperty("--process-p", `${processProgress * 100}%`);
     const processIndex = Math.min(processSteps.length - 1, Math.floor(processProgress * processSteps.length));
-    processSteps.forEach((step, index) => step.classList.toggle("is-active", index <= processIndex));
+    processSteps.forEach((step, index) => {
+      const active = processFlowsVertically
+        ? step.getBoundingClientRect().top <= window.innerHeight * 0.72
+        : index <= processIndex;
+      step.classList.toggle("is-active", active);
+      step.querySelector(".process__description").setAttribute("aria-hidden", String(!active));
+    });
 
     if (window.innerWidth > 900) {
       const trackPadding = parseFloat(getComputedStyle(track).paddingLeft) || 0;
@@ -301,7 +290,6 @@ function setupScrollStory() {
 
 setupIntro();
 setupMenu();
-setupProcess();
 setupReveals();
 setupServices();
 setupMagneticButton();

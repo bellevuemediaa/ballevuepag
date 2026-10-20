@@ -1628,38 +1628,39 @@ html.motion-reduced .project__flare::before { animation: none; }
   .team__statement strong { padding-right: .2em; }
 }
 
-/* Clickable process steps keep the original scroll-led rhythm. */
-.process__steps li { opacity: .58; }
+/* Each process note appears beneath its title as that stage turns white. */
+.process__steps li { opacity: 1; }
 .process__step {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   padding: .6rem 0 1rem;
-  border: 0;
-  background: transparent;
-  color: inherit;
   text-align: left;
-  cursor: pointer;
 }
-.process__step:hover strong,
-.process__step:focus-visible strong,
-.process__steps li.is-selected strong { color: var(--gold); }
-.process__steps li:hover,
-.process__steps li:focus-within { opacity: 1; }
-.process__step:focus-visible { outline: 2px solid var(--gold); outline-offset: .35rem; }
-.process__steps li.is-selected { opacity: 1; }
-.process__detail {
-  position: relative;
-  z-index: 2;
-  max-width: 40rem;
-  margin: 0 0 1.5rem;
-  color: var(--white);
-  font-size: clamp(1rem, 1.5vw, 1.35rem);
+.process__content { min-width: 0; }
+.process__description {
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(.88rem, 1.15vw, 1rem);
   line-height: 1.45;
+  opacity: 0;
+  transform: translateY(.5rem);
+  transition: max-height .55s ease, margin-top .55s ease, opacity .45s ease, transform .45s ease;
 }
-.process__detail[hidden] { display: none; }
+.process__steps li.is-active .process__description {
+  max-height: 14rem;
+  margin-top: 1rem;
+  opacity: 1;
+  transform: none;
+}
 @media (max-width: 900px) {
+  .process { height: auto; }
+  .process__stage { position: relative; height: auto; min-height: 100svh; overflow: visible; }
   .process__steps li { display: block; }
   .process__step { display: grid; grid-template-columns: 3.5rem 1fr; align-items: center; }
+  .process__steps strong { font-size: clamp(1.8rem, 4vw, 2.7rem); }
+  .process__description { max-width: 36rem; }
 }
