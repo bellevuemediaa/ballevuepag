@@ -1628,6 +1628,16 @@ html.motion-reduced .project__flare::before { animation: none; }
   .team__statement strong { padding-right: .2em; }
 }
 
+/* Avoid white outlines over the gold fill; wrapped mobile text stays fully painted. */
+.team__statement strong { -webkit-text-stroke: 0; }
+@media (max-width: 900px) {
+  .team__statement strong {
+    background: none;
+    color: var(--gold);
+    -webkit-text-fill-color: var(--gold);
+  }
+}
+
 /* Each process note appears beneath its title as that stage turns white. */
 .process__steps li { opacity: 1; }
 .process__step {
