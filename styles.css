@@ -1620,7 +1620,12 @@ html.motion-reduced .project__flare::before { animation: none; }
 
 /* The display font extends beyond its final advance width on desktop. */
 @media (min-width: 901px) {
-  .team__statement strong { padding-right: .2em; }
+  .team__statement strong {
+    /* Safari clips background-painted glyph edges to a tight inline box. */
+    padding: .18em .22em;
+    margin: -.18em -.22em;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 /* Keep the scroll-driven fill visible on every line, including wrapped mobile text. */
