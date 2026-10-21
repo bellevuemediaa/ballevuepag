@@ -1609,32 +1609,44 @@ html.motion-reduced .project__flare::before { animation: none; }
   .team__statement strong { font-size: clamp(2.6rem, 13vw, 4.3rem); }
 }
 
-/* Paint the real letters so the final S cannot be clipped by a duplicate overlay. */
+/* Reveal a full gold text layer instead of clipping a text-background gradient.
+   WebKit can truncate the gradient at wrapped line-box boundaries on Retina screens. */
 .team__statement strong {
-  color: transparent;
-  background: linear-gradient(90deg, var(--gold) 0 var(--team-fill), rgba(255, 255, 255, .12) var(--team-fill) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: rgba(255, 255, 255, .12);
+  -webkit-text-fill-color: rgba(255, 255, 255, .12);
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  line-height: 1.12;
+  padding: .2em .12em;
+  margin: -.2em -.12em;
 }
-.team__statement strong::after { content: none; }
+.team__statement strong::after {
+  content: attr(data-text);
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: inherit;
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
+  white-space: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  clip-path: inset(0 calc(100% - var(--team-fill)) 0 0);
+}
 
 /* The display font extends beyond its final advance width on desktop. */
 @media (min-width: 901px) {
   .team__statement strong {
-    /* Safari clips background-painted glyph edges to a tight inline box. */
-    padding: .18em .22em;
-    margin: -.18em -.22em;
-    -webkit-text-fill-color: transparent;
+    line-height: 1.16;
+    padding: .25em .3em;
+    margin: -.25em -.3em;
   }
 }
 
 /* Keep the scroll-driven fill visible on every line, including wrapped mobile text. */
 .team__statement strong { -webkit-text-stroke: 0; }
-@media (max-width: 900px) {
-  .team__statement strong {
-    -webkit-text-fill-color: transparent;
-  }
-}
 
 /* Longer Spanish headings need to fit without clipping the final letters. */
 html[lang="es"] .manifesto__words span:nth-child(3) { font-size: min(10vw, 10rem); }
