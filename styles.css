@@ -1631,6 +1631,12 @@ html.motion-reduced .project__flare::before { animation: none; }
   }
 }
 
+/* Longer Spanish headings need to fit without clipping the final letters. */
+html[lang="es"] .manifesto__words span:nth-child(3) { font-size: min(10vw, 10rem); }
+@media (max-width: 560px) {
+  html[lang="es"] .team__statement strong { font-size: 10.5vw; }
+}
+
 /* Each process note appears beneath its title as that stage turns white. */
 .process__steps li { opacity: 1; }
 .process__step {
