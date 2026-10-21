@@ -515,6 +515,16 @@ function setupPhotoSlider() {
   const measure = () => {
     const oldWidth = photoWidth;
     photoWidth = track.firstElementChild.getBoundingClientRect().width;
+    if (!photoWidth) return;
+    while (track.scrollWidth < frame.clientWidth + photoWidth) {
+      const image = document.createElement("img");
+      image.width = 1000;
+      image.height = 1778;
+      image.decoding = "async";
+      image.dataset.photoImage = "";
+      setPhoto(image, current + track.children.length);
+      track.append(image);
+    }
     if (oldWidth) offset = offset / oldWidth * photoWidth;
     renderPosition();
   };
@@ -523,7 +533,7 @@ function setupPhotoSlider() {
     offset -= photoWidth;
     const first = track.firstElementChild;
     track.append(first);
-    setPhoto(first, current + 3);
+    setPhoto(first, current + track.children.length - 1);
     updateSliderLabel();
   };
   const stopAuto = () => {
